@@ -1,0 +1,1 @@
+This is a quick test to understand how to use git
