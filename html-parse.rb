@@ -24,8 +24,10 @@ doc = Nokogiri::HTML(open(baseURL))
 puts ""
 puts "SEARCH PAGE: " + baseURL
 
-serps = doc.css("h3.r a")
-url=doc.css("cite")
+serps = doc.css("h3.r a").select{|link| link["class"]!="fl"}
+serpsSuppress = doc.css('h3.r a[class="sla"]')
+serps = serps-serpsSuppress
+url=doc.css('cite')
 
 puts ""
 puts "Search term: "
