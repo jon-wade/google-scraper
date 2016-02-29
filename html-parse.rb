@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'date'
 
 puts 'Input search phrase: '
 input = gets.chomp
@@ -78,6 +79,8 @@ url_array = array_na(extracthref(serps)).flatten
 
 
 #format output header to the console
+puts ''
+puts 'Date: ' + Time.now.strftime("%Y/%m/%d")
 puts ''
 puts 'Search term: ' + input
 puts ''
