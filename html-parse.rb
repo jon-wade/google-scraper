@@ -108,17 +108,21 @@ end
 
 #check to see whether the results should be inserted into the database
 def insert_db
-  puts ''
-  puts '--------------'
   puts 'Do you want to save the results in the database (Y/N): '
   answer = user_input
   if answer.upcase == 'Y'
+    puts '*************'
     puts 'You answered yes'
+    puts '*************'
     #insert database insertion method here
   elsif answer.upcase == 'N'
-    puts 'You answered no. Goodbye...'
+    puts '*************'
+    puts 'Ok boss. Results not saved.'
+    puts '*************'
   else
-    puts 'You didn\'t answer properly, please re-input!'
+    puts '*************'
+    puts 'I don\'t understand what you said, please can you re-enter your choice?'
+    puts '*************'
     insert_db
   end
 end
