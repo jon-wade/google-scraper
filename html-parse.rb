@@ -23,6 +23,8 @@ baseURL = holdingURL
 #use the Nokogiri library to parse the HTML page at the baseURL location
 #and output the search page to the console
 doc = Nokogiri::HTML(open(baseURL))
+
+
 puts ""
 puts "SEARCH PAGE: " + baseURL
 
@@ -32,17 +34,32 @@ serps = doc.css('h3.r a:not([class!=""])')
 
 puts serps #outputing for debugging
 
+def extractHref(serps)
+  split_array=[]
+  #go through the serps NodeList one by one and extract the href attribute of the anchor tags
+  (0..serps.length-1).each {|i|
+    serps_url = serps[i]["href"]
+    #remove junk that Google appends before and after the end of the returned search result pages
+    #using a funky regular expression and push it into a new array
+    split_array.push(serps_url.split(/(http.*?)(?=&)/))
+  }
+  #delete the junk in the array before the element we need
+  (0..serps.length-1).each {|i|
+    split_array[i].delete_at(0)
+  }
+  #delete the junk in the array after the element we need (note all elements have moved index by one)
+  #due to the last function
+  (0..serps.length-1).each {|i|
+    split_array[i].delete_at(1)
+  }
+  return split_array
+end
 
-#go through the serps NodeList one by one and extract the href attribute of the anchor tags
-#TO DO: this needs to be turned into a method
-(0..serps.length-1).each {|i|
-  serps_url = serps[i]["href"]
-  #remove junk that Google appends before and after the end of the returned search result pages
-  #using a funky regular expression
-  split_array = serps_url.split(/(http.*?)(?=&)/)
-  puts split_array[1]
-}
+url_array = extractHref(serps)
 
+# (0..url_array.length-1).each do |i|
+#   puts url_array[i]
+# end
 
 
 #format output header to the console
@@ -51,21 +68,17 @@ puts "Search term: "
 puts ""
 puts "# search results: " + serps.length.to_s
 puts ""
+puts "# url results: " + url_array.length.to_s
+puts ""
 puts "*************"
 
-jump=0  #this is currently a hack to deal with image results appearing in search listings - needs fixing
-
 for i in (0..serps.length-1)
-  if serps[i].text.include? "Images" #same hack, dealing with pages that contain image result listings
-    jump +=1
-  else
-    #return the link titles from the listing on the page
-    puts "Rank " + (i+1-jump).to_s + " Listing: " + serps[i].text
-    #return the link href from the listing on the page - needs fixing
-    #puts "Rank " + (i+1-jump).to_s + " URL: " + url[i-jump].text
-    puts "__________"
-    puts ""
-  end
+  #return the link titles from the listing on the page
+  puts "Rank " + (i+1).to_s + " Listing: " + serps[i].text
+  #return the link href from the listing on the page
+  puts "Rank " + (i+1).to_s + " URL: " + url_array[i][0].to_s
+  puts "__________"
+  puts ""
 end
 
 
