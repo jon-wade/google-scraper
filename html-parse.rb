@@ -1,44 +1,44 @@
 require 'open-uri'
 require 'nokogiri'
 
-puts "Input search phrase: "
+puts 'Input search phrase: '
 input = gets.chomp
-searchTerm = input.split #split input at each space delimiter into an array
+search_term = input.split #split input at each space delimiter into an array
 
-holdingURL = "https://www.google.co.uk/search?q=" #standard search query
+holding_url = 'https://www.google.co.uk/search?q=' #standard search query
 
 #the following code constructs the search query by appending the search
 #words onto the end of the holding URL and adding the encoding for a space
 #which is %20 to separate each search word in the URL
 
-(0..(searchTerm.length-1)).each {|i|
-  holdingURL += searchTerm[i]
-  if i<searchTerm.length-1
-    holdingURL += "%20"
+(0..(search_term.length-1)).each {|i|
+  holding_url += search_term[i]
+  if i<search_term.length-1
+    holding_url += '%20'
   end
 }
 
-baseURL = holdingURL
+base_url = holding_url
 
-#use the Nokogiri library to parse the HTML page at the baseURL location
+#use the Nokogiri library to parse the HTML page at the base_url location
 #and output the search page to the console
-doc = Nokogiri::HTML(open(baseURL))
+doc = Nokogiri::HTML(open(base_url))
 
 
-puts ""
-puts "SEARCH PAGE: " + baseURL
+puts ''
+puts 'SEARCH PAGE: ' + base_url
 
 #search through the HTML page and locate all the tags that contain the
 #search links using the css selector below
 serps = doc.css('h3.r a:not([class!=""])')
 
-puts serps #outputing for debugging
+# puts serps #outputing for debugging
 
-def extractHref(serps)
+def extracthref(serps)
   split_array=[]
   #go through the serps NodeList one by one and extract the href attribute of the anchor tags
   (0..serps.length-1).each {|i|
-    serps_url = serps[i]["href"]
+    serps_url = serps[i]['href']
     #remove junk that Google appends before and after the end of the returned search result pages
     #using a funky regular expression and push it into a new array
     split_array.push(serps_url.split(/(http.*?)(?=&)/))
@@ -52,33 +52,49 @@ def extractHref(serps)
   (0..serps.length-1).each {|i|
     split_array[i].delete_at(1)
   }
-  return split_array
+  split_array
 end
 
-url_array = extractHref(serps)
+#sort out the problem when Image results appear and create a gap in the url_array
 
-# (0..url_array.length-1).each do |i|
-#   puts url_array[i]
-# end
+def array_na(array)
+  #iterate through each element and check to see if its nil
+  (0..array.length-1).each do |k|
+    if array[k][0].nil?
+      #if it is nil, insert the string N/A into that point in the array
+      array[k][0] = 'N/A'
+    end
+  end
+  array
+end
+
+#What does this do? Reading from the inside out, first the serps NodeList is passed into the extracthref
+#method which pulls the href substring out and returns it into an array called split_array.
+#split_array is a 2d array but with only one element in the second dimension as the other elements have been
+#deleted. Then split_array is passed into the method array_na which substitutes any missing elements
+#with the string N/A. This returns an array called array which is then flattened into a 1d array. Phew!!
+
+url_array = array_na(extracthref(serps)).flatten
 
 
 #format output header to the console
-puts ""
-puts "Search term: "
-puts ""
-puts "# search results: " + serps.length.to_s
-puts ""
-puts "# url results: " + url_array.length.to_s
-puts ""
-puts "*************"
+puts ''
+puts 'Search term: ' + input
+puts ''
+puts '# search results: ' + serps.length.to_s
+puts ''
+puts '# url results: ' + url_array.length.to_s
+puts ''
+puts '*************'
 
-for i in (0..serps.length-1)
+
+(0..serps.length-1).each do |i|
   #return the link titles from the listing on the page
-  puts "Rank " + (i+1).to_s + " Listing: " + serps[i].text
+  puts 'Rank ' + (i+1).to_s + ' Listing: ' + serps[i].text
   #return the link href from the listing on the page
-  puts "Rank " + (i+1).to_s + " URL: " + url_array[i][0].to_s
-  puts "__________"
-  puts ""
+  puts 'Rank ' + (i+1).to_s + ' URL: ' + url_array[i].to_s
+  puts '__________'
+  puts ''
 end
 
 
