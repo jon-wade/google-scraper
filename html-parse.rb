@@ -69,6 +69,12 @@ def array_na(array)
   array
 end
 
+#a user input method
+def user_input
+  input = gets.chomp
+  input
+end
+
 #What does this do? Reading from the inside out, first the serps NodeList is passed into the extracthref
 #method which pulls the href substring out and returns it into an array called split_array.
 #split_array is a 2d array but with only one element in the second dimension as the other elements have been
@@ -99,6 +105,27 @@ puts '*************'
   puts '__________'
   puts ''
 end
+
+#check to see whether the results should be inserted into the database
+def insert_db
+  puts ''
+  puts '--------------'
+  puts 'Do you want to save the results in the database (Y/N): '
+  answer = user_input
+  if answer.upcase == 'Y'
+    puts 'You answered yes'
+    #insert database insertion method here
+  elsif answer.upcase == 'N'
+    puts 'You answered no. Goodbye...'
+  else
+    puts 'You didn\'t answer properly, please re-input!'
+    insert_db
+  end
+end
+
+insert_db
+
+
 
 
 

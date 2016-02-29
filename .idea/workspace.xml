@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f524a806-ccf3-4a9a-a4fe-279abe38c13b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html-parse.rb" afterPath="$PROJECT_DIR$/html-parse.rb" />
     </list>
     <ignored path="untitled.iws" />
@@ -35,13 +34,13 @@
       <file leaf-file-name="html-parse.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html-parse.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4385965">
-              <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.67836255">
+              <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
               <folding>
                 <element signature="e#490#587#0" expanded="false" />
                 <element signature="e#1007#1773#0" expanded="false" />
                 <element signature="e#1858#2119#0" expanded="false" />
-                <element signature="e#2931#3197#0" expanded="false" />
+                <element signature="e#2978#3244#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -343,7 +342,7 @@
             <element signature="e#490#587#0" expanded="false" />
             <element signature="e#1007#1773#0" expanded="false" />
             <element signature="e#1858#2119#0" expanded="false" />
-            <element signature="e#2931#3197#0" expanded="false" />
+            <element signature="e#2978#3244#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -365,13 +364,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html-parse.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4385965">
-          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.67836255">
+          <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
           <folding>
             <element signature="e#490#587#0" expanded="false" />
             <element signature="e#1007#1773#0" expanded="false" />
             <element signature="e#1858#2119#0" expanded="false" />
-            <element signature="e#2931#3197#0" expanded="false" />
+            <element signature="e#2978#3244#0" expanded="false" />
           </folding>
         </state>
       </provider>
