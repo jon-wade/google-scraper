@@ -3,6 +3,13 @@ require 'nokogiri'
 require 'date'
 require 'sqlite3'
 
+puts ''
+puts '********************************'
+puts '***** SEARCH SCRAPER 1.0 *******'
+puts '********************************'
+puts ''
+
+
 puts 'Input search phrase: '
 input = gets.chomp
 search_term = input.split #split input at each space delimiter into an array
@@ -35,8 +42,7 @@ puts 'SEARCH PAGE: ' + base_url
 serps = doc.css('h3.r a:not([class!=""])')
 
 #Define all methods in this area below
-#METHODS HERE ---------V
-
+#METHODS HERE ---------V---------------
 
 #a method to extract the href attribute from the serps NodeList
 def extracthref(serps)
@@ -74,7 +80,7 @@ end
 
 #a user input method to help with input that is not understood
 def user_input
-  input = gets.chomp
+  gets.chomp
 end
 
 #a method that opens the sqlite3 database connection and stores the command to insert records
@@ -91,28 +97,34 @@ def strip(str)
       chr.delete(i)
     end
   }
-  str = chr.join
+  chr.join
 end
 
 #a method to check to see whether the results should be inserted into the database
 def db_update?(date, input, serps, url_array)
-  puts 'Do you want to save the results in the database (Y/N): '
+  print 'Do you want to save the results in the database (Y/N): '
   answer = user_input
   if answer.upcase == 'Y'
-    puts '*************'
-    puts 'OK boss, database updated!'
-    puts '*************'
+    puts ''
+    puts '******************************'
+    puts '* OK boss, database updated! *'
+    puts '******************************'
+    puts ''
     #insert database insertion method here
     update_db(date, input, serps, url_array)
   elsif answer.upcase == 'N'
-    puts '*************'
-    puts 'Ok boss. Results not saved.'
-    puts '*************'
+    puts ''
+    puts '*****************************'
+    puts '* Ok boss, no changes made! *'
+    puts '*****************************'
+    puts ''
   else
+    puts ''
     puts '*************'
-    puts 'I don\'t understand what you said, please can you re-enter your choice?'
+    puts '* Say what? *'
     puts '*************'
-    db_update?
+    puts ''
+    db_update?(date, input, serps, url_array)
   end
 end
 
@@ -135,7 +147,7 @@ end
 url_array = array_na(extracthref(serps)).flatten
 
 #grab the current time and specify the format
-date = Time.now.strftime("%Y-%m-%d")
+date = Time.now.strftime('%Y-%m-%d')
 
 #format output header to the console
 puts ''
