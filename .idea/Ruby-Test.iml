@@ -7,5 +7,6 @@
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.3, ruby-2.0.0-p645) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile2 (v2.0.0, ruby-2.0.0-p645) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.6.7.2, ruby-2.0.0-p645) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.11, ruby-2.0.0-p645) [gem]" level="application" />
   </component>
 </module>
