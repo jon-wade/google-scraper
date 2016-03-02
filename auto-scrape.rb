@@ -87,7 +87,7 @@ end
 
 #a method that opens the sqlite3 database connection and stores the command to insert records
 def insert_records(date, search_term, rank, listing, url)
-  db = SQLite3::Database.open('store.sqlite')
+  db = SQLite3::Database.open('/Users/JW/RubymineProjects/Ruby-Test/store.sqlite')
   db.execute ("INSERT INTO records (date, search_term, rank, listing, url) VALUES ('#{date}', '#{search_term}', #{rank}, '#{listing}', '#{url}')")
 end
 
